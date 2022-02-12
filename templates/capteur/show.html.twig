@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Capteur{% endblock %}
+
+{% block body %}
+    <h1>Capteur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ capteur.idCapteur }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ capteur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Seuil min</th>
+                <td>{{ capteur.seuilmin }}</td>
+            </tr>
+            <tr>
+                <th>Seuil max</th>
+                <td>{{ capteur.seuilmax }}</td>
+            </tr>
+            <tr>
+                <th>Date de creation</th>
+                <td>{{ capteur.createdAt ? capteur.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('capteur_index') }}">retour à la liste</a>
+
+    <a href="{{ path('capteur_edit', {'idCapteur': capteur.idCapteur}) }}">modifier</a>
+
+    {{ include('capteur/_delete_form.html.twig') }}
+{% endblock %}

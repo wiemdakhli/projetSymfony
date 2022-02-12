@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Intervalle index{% endblock %}
+
+{% block body %}
+    <h1>Intervalle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rang min</th>
+                <th>Rang max</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for intervalle in intervalles %}
+            <tr>
+                <td>{{ intervalle.idIntervalle }}</td>
+                <td>{{ intervalle.rangmin }}</td>
+                <td>{{ intervalle.rangmax }}</td>
+                <td>
+                    <a href="{{ path('intervalle_show', {'idIntervalle': intervalle.idIntervalle}) }}">consulter</a>
+                    <a href="{{ path('intervalle_edit', {'idIntervalle': intervalle.idIntervalle}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('intervalle_new') }}">ajouter un nouveau intervalle</a>
+{% endblock %}

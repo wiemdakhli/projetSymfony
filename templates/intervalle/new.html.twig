@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}creer un nouveau Intervalle{% endblock %}
+
+{% block body %}
+    <h1>creer un nouveau Intervalle</h1>
+
+    {{ include('intervalle/_form.html.twig') }}
+
+    <a href="{{ path('intervalle_index') }}">retour à la liste</a>
+{% endblock %}

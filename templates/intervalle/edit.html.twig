@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Intervalle{% endblock %}
+
+{% block body %}
+    <h1>Modifier Intervalle</h1>
+
+    {{ include('intervalle/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('intervalle_index') }}">retour à la liste</a>
+
+    {{ include('intervalle/_delete_form.html.twig') }}
+{% endblock %}

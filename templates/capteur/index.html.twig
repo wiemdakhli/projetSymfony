@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Capteur index{% endblock %}
+
+{% block body %}
+    <h1>Capteur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Seuil min</th>
+                <th>Seuil max</th>
+                <th>Date De Creation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for capteur in capteurs %}
+            <tr>
+                <td>{{ capteur.idCapteur }}</td>
+                <td>{{ capteur.nom }}</td>
+                <td>{{ capteur.seuilmin }}</td>
+                <td>{{ capteur.seuilmax }}</td>
+                <td>{{ capteur.createdAt ? capteur.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('capteur_show', {'idCapteur': capteur.idCapteur}) }}">consulter</a>
+                    <a href="{{ path('capteur_edit', {'idCapteur': capteur.idCapteur}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('capteur_new') }}">ajouter un capteur</a>
+{% endblock %}
