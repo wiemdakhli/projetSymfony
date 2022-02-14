@@ -124,7 +124,5 @@ class Capteur
         return $this;
     }
 
-    
-
 
 }

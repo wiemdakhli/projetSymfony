@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valeur index{% endblock %}
+
+{% block body %}
+    <h1>Valeur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date/Heure</th>
+                <th>Valeur</th>
+                <th>etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for valeur in valeurs %}
+            <tr>
+                <td>{{ valeur.dateHeure ? valeur.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ valeur.valeur }}</td>
+                <td>
+                    {% if valeur.valeur > 12 or valeur.valeur < 0  %}
+                    anormale
+                    {% else %}
+                    normale   
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('valeur_show', {'idValeur': valeur.idValeur }) }}">show</a>
+                    <a href="{{ path('valeur_edit', {'idValeur': valeur.idValeur }) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('valeur_new') }}">Create new</a>
+{% endblock %}

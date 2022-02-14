@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valeur{% endblock %}
+
+{% block body %}
+    <h1>Valeur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>DateHeure</th>
+                <td>{{ valeur.dateHeure ? valeur.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Valeur</th>
+                <td>{{ valeur.valeur }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('valeur_index') }}">back to list</a>
+
+    <a href="{{ path('valeur_edit', {'idValeur': valeur.idValeur}) }}">edit</a>
+
+    {{ include('valeur/_delete_form.html.twig') }}
+{% endblock %}

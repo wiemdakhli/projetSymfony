@@ -20,10 +20,11 @@ class CapteurController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $capteurs = $entityManager
             ->getRepository(Capteur::class)
             ->findAll();
-
+        
         return $this->render('capteur/index.html.twig', [
             'capteurs' => $capteurs,
         ]);
@@ -38,6 +39,7 @@ class CapteurController extends AbstractController
         $form = $this->createForm(CapteurType::class, $capteur);
         $form->handleRequest($request);
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $capteur->setCreatedAt(new \DateTime());
             $entityManager->persist($capteur);
@@ -48,7 +50,7 @@ class CapteurController extends AbstractController
 
         return $this->renderForm('capteur/new.html.twig', [
             'capteur' => $capteur,
-            'form' => $form,
+            'form' => $form
         ]);
     }
 

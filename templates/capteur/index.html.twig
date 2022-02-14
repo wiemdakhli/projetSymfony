@@ -36,6 +36,13 @@
         {% endfor %}
         </tbody>
     </table>
+    {% for capteur in capteurs %}
+        {% if capteur.seuilmax > capteur.ref.rangmax %}
+        <h1>{{capteur.seuilmax}}</h1>
+        {% else %}
+        <h1>{{capteur.ref.rangmax}}</h1>
+    {% endif %}
+    {% endfor %}
 
     <a href="{{ path('capteur_new') }}">ajouter un capteur</a>
 {% endblock %}
