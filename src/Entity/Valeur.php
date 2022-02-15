@@ -22,6 +22,16 @@ class Valeur
     private $idValeur;
 
     /**
+     * @var \Capteur
+     *
+     * @ORM\ManyToOne(targetEntity="Capteur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_capteur", referencedColumnName="id_capteur")
+     * })
+     */
+    private $idCapteur;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="valeur", type="float", precision=10, scale=0, nullable=false)
@@ -38,6 +48,18 @@ class Valeur
     public function getIdValeur(): ?int
     {
         return $this->idValeur;
+    }
+
+    public function getIdCapteur(): ?Capteur
+    {
+        return $this->idCapteur;
+    }
+
+    public function setIdCapteur(?Capteur $idCapteur): self
+    {
+        $this->idCapteur = $idCapteur;
+
+        return $this;
     }
 
     public function getValeur(): ?float

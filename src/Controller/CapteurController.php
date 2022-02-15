@@ -21,6 +21,7 @@ class CapteurController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
+
         $capteurs = $entityManager
             ->getRepository(Capteur::class)
             ->findAll();

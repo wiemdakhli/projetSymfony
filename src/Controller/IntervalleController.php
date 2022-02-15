@@ -20,6 +20,8 @@ class IntervalleController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         $intervalles = $entityManager
             ->getRepository(Intervalle::class)
             ->findAll();

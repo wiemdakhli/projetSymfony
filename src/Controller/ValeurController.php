@@ -20,6 +20,8 @@ class ValeurController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $valeurs = $entityManager
             ->getRepository(Valeur::class)
             ->findAll();
@@ -71,7 +73,6 @@ class ValeurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $capteur->setDateHeure(new \DateTime());
             $entityManager->flush();
 
             return $this->redirectToRoute('valeur_index', [], Response::HTTP_SEE_OTHER);

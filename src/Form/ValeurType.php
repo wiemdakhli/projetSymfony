@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Capteur;
 
 class ValeurType extends AbstractType
 {
@@ -15,6 +17,10 @@ class ValeurType extends AbstractType
     {
         $builder
             ->add('valeur')
+            ->add('id_capteur', EntityType::class,[
+                'class' => Capteur::class,
+                'choice_label' => 'id_capteur'
+            ])
         ;
     }
 

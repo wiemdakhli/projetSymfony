@@ -3,12 +3,14 @@
 {% block title %}Capteur index{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Capteur index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>ref</th>
                 <th>Nom</th>
                 <th>Seuil min</th>
                 <th>Seuil max</th>
@@ -20,6 +22,7 @@
         {% for capteur in capteurs %}
             <tr>
                 <td>{{ capteur.idCapteur }}</td>
+                <td> {{capteur.ref.idIntervalle}} </td>
                 <td>{{ capteur.nom }}</td>
                 <td>{{ capteur.seuilmin }}</td>
                 <td>{{ capteur.seuilmax }}</td>
@@ -36,13 +39,7 @@
         {% endfor %}
         </tbody>
     </table>
-    {% for capteur in capteurs %}
-        {% if capteur.seuilmax > capteur.ref.rangmax %}
-        <h1>{{capteur.seuilmax}}</h1>
-        {% else %}
-        <h1>{{capteur.ref.rangmax}}</h1>
-    {% endif %}
-    {% endfor %}
-
+    
     <a href="{{ path('capteur_new') }}">ajouter un capteur</a>
+</div>
 {% endblock %}
