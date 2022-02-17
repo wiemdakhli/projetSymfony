@@ -12,6 +12,9 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -43,6 +46,17 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('roles', ChoiceType::class,[
+                'choices' => [
+                    'utilisateur' => 'ROLE_USER',
+                    'administrateur' => 'ROLE_ADMIN'
+                ],
+                'expanded'=>true,
+                'multiple'=>true,
+                'label' => 'Roles'
+                
+            ])
+            
         ;
     }
 

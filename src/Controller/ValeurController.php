@@ -25,11 +25,22 @@ class ValeurController extends AbstractController
         $valeurs = $entityManager
             ->getRepository(Valeur::class)
             ->findAll();
-
-        return $this->render('valeur/index.html.twig', [
-            'valeurs' => $valeurs,
-        ]);
+    
+        $capNom = [];
+        $capDate = [];
+    
+        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
+            foreach($valeurs as $valeur){
+                $capNom[] = $valeur->getValeur();
+                $capDate[] = $valeur->getDateHeure()->format('Y-m-d H:i:s');
+            }
+            return $this->render('valeur/index.html.twig', [
+                'valeurs' => $valeurs,
+                'capNom' => json_encode($capNom),
+                'capDate' => json_encode($capDate)
+            ]);
     }
+    
 
     /**
      * @Route("/new", name="valeur_new", methods={"GET", "POST"})
@@ -96,4 +107,5 @@ class ValeurController extends AbstractController
 
         return $this->redirectToRoute('valeur_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

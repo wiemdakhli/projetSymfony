@@ -1,14 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Valeur index{% endblock %}
+{% block stylesheet %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/helpers.esm.min.js" integrity="sha512-urWBnIv+F027G24xDNigjxvIuwnWlWy94W2yx77VkISKLzKSohOKOubMDhtEF6LZcEH7gctmNSpxDqIW/zMmUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
 
 {% block body %}
-<div class="container">
+<section></section>
 {% for valeur in valeurs %}
     {% if valeur.valeur > valeur.idCapteur.seuilMax or valeur.valeur < valeur.idCapteur.seuilMin  %}
     {# read and display all flash messages #}
         {# <div class="flash-{{ label }}"> #}
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="alert-warning">
                 <div class="toast-header">
                 <strong class="me-auto">plage seuil depassé</strong>
                 <small>
@@ -31,13 +36,15 @@
                 </div>
             </div>
         </div>
+        </div>
     {% endif %}
 {% endfor %}
+
 <div class="container">
-    <h1>Valeur index</h1>
-    <table class="table">
+    <center><h1>Valeurs</h1></center>
+    <table class="table table-hover">
         <thead>
-            <tr>
+            <tr class="table-warning" >
                 <th>Date/Heure</th>
                 <th>nom</th>
                 <th>Valeur</th>
@@ -47,7 +54,7 @@
         </thead>
         <tbody>
         {% for valeur in valeurs %}
-            <tr>
+            <tr class="table-info">
                 <td>{{ valeur.dateHeure ? valeur.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ valeur.idCapteur.nom }}</td>
                 <td>{{ valeur.valeur }}</td>
@@ -70,8 +77,46 @@
         {% endfor %}
         </tbody>
     </table>
-
     <a href="{{ path('valeur_new') }}">Create new</a>
 </div>
-</div>
+
+
+<h1>statiqtique</h1>
+<canvas id="myChart" width="1000" height="500"></canvas>
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{capDate|raw}},
+        datasets: [{
+            label: 'suivie',
+            data: {{capNom|raw}},
+            backgroundColor: [
+                'rgba(211,211,211)',
+            ],
+            borderColor: [
+                'rgba(0,0,205)'
+            ],
+            borderWidth: 2,
+            fill: false,
+            tension: 0.4
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        responsive: false
+    }
+});
+</script>
+
+{% endblock %}
+
 {% endblock %}

@@ -11,8 +11,12 @@
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+        <style>
+            table,th,td{font-weight:bold;}
+        </style>
+        
         {% endblock %}
 
         {% block javascripts %}
@@ -34,10 +38,10 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Historique</a>
+                    <a class="nav-link" href="{{ path('valeur_index') }}">consulter valeurs</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ path('capteur_index') }}">consulter Device</a>
+                    <a class="nav-link" href="{{ path('capteur_index') }}">gérer Device</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{ path('capteur_new') }}">ajouter capteur</a>
