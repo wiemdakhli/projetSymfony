@@ -3,11 +3,15 @@
 {% block title %}Modifier Intervalle{% endblock %}
 
 {% block body %}
-    <h1>Modifier Intervalle</h1>
+<div class="container" align="center">
+    <div class="col-4">
+    <center><h1>Modifier {{intervalle.idIntervalle}}</h1></center>
 
-    {{ include('intervalle/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('intervalle/_form.html.twig', {'button_label': 'mettre à jour'}) }}
 
     <a href="{{ path('intervalle_index') }}">retour à la liste</a>
 
-    {{ include('intervalle/_delete_form.html.twig') }}
+    <!-- {{ include('intervalle/_delete_form.html.twig') }} -->
+</div>
+</div>
 {% endblock %}

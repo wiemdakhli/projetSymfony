@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Valeur
  *
- * @ORM\Table(name="valeur")
+ * @ORM\Table(name="valeur", indexes={@ORM\Index(name="id_capteur", columns={"id_capteur"})})
  * @ORM\Entity
  */
 class Valeur
@@ -20,16 +20,6 @@ class Valeur
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idValeur;
-
-    /**
-     * @var \Capteur
-     *
-     * @ORM\ManyToOne(targetEntity="Capteur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_capteur", referencedColumnName="id_capteur")
-     * })
-     */
-    private $idCapteur;
 
     /**
      * @var float
@@ -45,21 +35,19 @@ class Valeur
      */
     private $dateHeure;
 
+    /**
+     * @var \Capteur
+     *
+     * @ORM\ManyToOne(targetEntity="Capteur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_capteur", referencedColumnName="id_capteur")
+     * })
+     */
+    private $idCapteur;
+
     public function getIdValeur(): ?int
     {
         return $this->idValeur;
-    }
-
-    public function getIdCapteur(): ?Capteur
-    {
-        return $this->idCapteur;
-    }
-
-    public function setIdCapteur(?Capteur $idCapteur): self
-    {
-        $this->idCapteur = $idCapteur;
-
-        return $this;
     }
 
     public function getValeur(): ?float
@@ -82,6 +70,18 @@ class Valeur
     public function setDateHeure(\DateTimeInterface $dateHeure): self
     {
         $this->dateHeure = $dateHeure;
+
+        return $this;
+    }
+
+    public function getIdCapteur(): ?Capteur
+    {
+        return $this->idCapteur;
+    }
+
+    public function setIdCapteur(?Capteur $idCapteur): self
+    {
+        $this->idCapteur = $idCapteur;
 
         return $this;
     }

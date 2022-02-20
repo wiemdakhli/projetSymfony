@@ -3,13 +3,18 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>gestion des comptes</h1>
-
-    <table class="table">
+<div class="container">
+    <center><h1>gestion des comptes</h1></center>
+    <a class="btn" style="background-color:rgb(93, 160, 104);color:white;" href="{{ path('admin_new') }}"><i class="bi bi-plus-square"></i> compte</a>
+    <br><br>
+    <table class="table table-hover">
         <thead>
-            <tr>
+            <tr class="table-dark">
                 <th>Id</th>
                 <th>Email</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>telephone</th>
                 <th>Roles</th>
                 {# <th>Password</th> #}
                 <th>actions</th>
@@ -17,9 +22,12 @@
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
+            <tr class="table-info">
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.telephone }}</td>
                 <td>
                     {% for role in user.roles %}
                         {% if role =="ROLE_USER" %}
@@ -31,8 +39,8 @@
                 </td>
                 {# <td>{{ user.password }}</td> #}
                 <td>
-                    <a href="{{ path('admin_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('admin_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn" style="background-color:white;" href="{{ path('admin_show', {'id': user.id}) }}"><i class="bi bi-search"></i> infos</a>
+                    <a class="btn" style="background-color:white;" href="{{ path('admin_edit', {'id': user.id}) }}"><i class="bi bi-pencil-square"></i> modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -42,6 +50,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('admin_new') }}">Create new</a>
+</div>
 {% endblock %}

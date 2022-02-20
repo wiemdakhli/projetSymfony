@@ -3,9 +3,13 @@
 {% block title %}creer un nouveau Intervalle{% endblock %}
 
 {% block body %}
-    <h1>creer un nouveau Intervalle</h1>
+<div class="container" align="center">
+    <div class="col-4">
+    <center><h1>ajouter Intervalle</h1></center>
 
     {{ include('intervalle/_form.html.twig') }}
 
     <a href="{{ path('intervalle_index') }}">retour à la liste</a>
+</div>
+</div>
 {% endblock %}

@@ -4,11 +4,13 @@
 
 {% block body %}
 <div class="container">
-    <h1>Intervalle index</h1>
 
-    <table class="table">
+    <center><h1>liste des intervalles</h1></center>
+    <a class="btn" style="background-color:rgb(93, 160, 104);color:white;" href="{{ path('intervalle_new') }}"><i class="bi bi-plus-square"></i> intervalle</a>
+    <br><br>
+    <table class="table table-hover">
         <thead>
-            <tr>
+            <tr class="table-dark">
                 <th>Id</th>
                 <th>Rang min</th>
                 <th>Rang max</th>
@@ -17,13 +19,13 @@
         </thead>
         <tbody>
         {% for intervalle in intervalles %}
-            <tr>
+            <tr class="table-info">
                 <td>{{ intervalle.idIntervalle }}</td>
                 <td>{{ intervalle.rangmin }}</td>
                 <td>{{ intervalle.rangmax }}</td>
                 <td>
-                    <a href="{{ path('intervalle_show', {'idIntervalle': intervalle.idIntervalle}) }}">consulter</a>
-                    <a href="{{ path('intervalle_edit', {'idIntervalle': intervalle.idIntervalle}) }}">modifier</a>
+                    <a class="btn" style="background-color:white;" href="{{ path('intervalle_show', {'idIntervalle': intervalle.idIntervalle}) }}" ><i class="bi bi-search"></i> infos</a>
+                    <a class="btn" style="background-color:white;" href="{{ path('intervalle_edit', {'idIntervalle': intervalle.idIntervalle}) }}" ><i class="bi bi-pencil-square"></i> modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -33,7 +35,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('intervalle_new') }}">ajouter un nouveau intervalle</a>
 </div>
 {% endblock %}

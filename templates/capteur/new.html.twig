@@ -3,9 +3,13 @@
 {% block title %}Nouveau Capteur{% endblock %}
 
 {% block body %}
-    <h1>Creer un nouveau Capteur</h1>
+<div class="container" align="center">
+    <div class="col-4">
+    <center><h1>ajouter un Capteur</h1></center>
 
     {{ include('capteur/_form.html.twig') }}
 
     <a href="{{ path('capteur_index') }}" >retour à la liste</a>
+</div>
+</div>
 {% endblock %}

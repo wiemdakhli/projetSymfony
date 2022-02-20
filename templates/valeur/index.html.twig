@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Valeur index{% endblock %}
+
 {% block stylesheet %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/helpers.esm.min.js" integrity="sha512-urWBnIv+F027G24xDNigjxvIuwnWlWy94W2yx77VkISKLzKSohOKOubMDhtEF6LZcEH7gctmNSpxDqIW/zMmUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock %}
 
 
 {% block body %}
-<section></section>
 {% for valeur in valeurs %}
     {% if valeur.valeur > valeur.idCapteur.seuilMax or valeur.valeur < valeur.idCapteur.seuilMin  %}
     {# read and display all flash messages #}
         {# <div class="flash-{{ label }}"> #}
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="alert-warning">
+                <div class="alert" style="font-weight:bold;">
                 <div class="toast-header">
-                <strong class="me-auto">plage seuil depassé</strong>
-                <small>
+                <strong class="me-auto" style="font-weight:bold;color:red;"><i class="bi bi-exclamation-circle-fill" style="color:red;"></i> plage seuil depassé</strong>
+                <small style="font-weight:bold;">
                     {{valeur.dateHeure|date('Y-m-d')}}
                     <br>
                     {{valeur.dateHeure|date('H:i:s')}}
@@ -44,12 +44,13 @@
     <center><h1>Valeurs</h1></center>
     <table class="table table-hover">
         <thead>
-            <tr class="table-warning" >
+            <tr class="table-dark" >
                 <th>Date/Heure</th>
                 <th>nom</th>
+                <th>indice</th>
                 <th>Valeur</th>
                 <th>etat</th>
-                <th>actions</th>
+                <!-- <th>actions</th> -->
             </tr>
         </thead>
         <tbody>
@@ -57,18 +58,19 @@
             <tr class="table-info">
                 <td>{{ valeur.dateHeure ? valeur.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ valeur.idCapteur.nom }}</td>
+                <td>{{ valeur.idCapteur.ref.idIntervalle }}</td>
                 <td>{{ valeur.valeur }}</td>
                 <td>
                     {% if valeur.valeur > valeur.idCapteur.seuilMax or valeur.valeur < valeur.idCapteur.seuilMin  %}
-                    anormale
+                    <span class="badge bg-danger">alerte</span>
                     {% else %}
-                    normale   
+                    normal   
                     {% endif %}
                 </td>
-                <td>
-                    <a href="{{ path('valeur_show', {'idValeur': valeur.idValeur }) }}">show</a>
-                    <a href="{{ path('valeur_edit', {'idValeur': valeur.idValeur }) }}">edit</a>
-                </td>
+                <!-- <td>
+                    <a href="{{ path('valeur_show', {'idValeur': valeur.idValeur }) }}"><i class="bi bi-search"></i>consulter</a>
+                    <a href="{{ path('valeur_edit', {'idValeur': valeur.idValeur }) }}"><i class="bi bi-pencil-square"></i>modifier</a>
+                </td> -->
             </tr>
         {% else %}
             <tr>
@@ -77,12 +79,13 @@
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('valeur_new') }}">Create new</a>
+    <!-- <a class="btn btn-dark" href="{{ path('valeur_new') }}"><i class="bi bi-plus-square"></i> capteur</a> -->
 </div>
-
-
-<h1>statiqtique</h1>
-<canvas id="myChart" width="1000" height="500"></canvas>
+<br>
+<div class="container">
+<center><h1>statistiques</h1></center>
+<canvas id="myChart" width="1300" height="500"></canvas>
+</div>
 
 {% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -93,15 +96,15 @@ const myChart = new Chart(ctx, {
     data: {
         labels: {{capDate|raw}},
         datasets: [{
-            label: 'suivie',
+            label: 'valeur',
             data: {{capNom|raw}},
             backgroundColor: [
                 'rgba(211,211,211)',
             ],
             borderColor: [
-                'rgba(0,0,205)'
+                'rgb(139,0,0)'
             ],
-            borderWidth: 2,
+            borderWidth: 3,
             fill: false,
             tension: 0.4
         }]

@@ -14,6 +14,7 @@
         
         {% block stylesheets %}
         <style>
+            label{font-weight:bold;font-size:20px;}
             table,th,td{font-weight:bold;}
         </style>
         
@@ -24,30 +25,53 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">application</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+            <div class="container-fluid" >
+              <a style ="background-color:white;" class="navbar-brand" href="#">
+                <img width="150px" src="http://www.dig2s.com/images/logo1-removebg-preview.png" alt="">
+              </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto">
+              <div class="collapse navbar-collapse" id="navbarColor02" >
+                <ul class="navbar-nav me-auto" style="font-size: 16px;">
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ path('capteur_index') }}">Home
+                    <a class="nav-link" href="{{ path('capteur_index') }}" style="color:white;" >accueil
                       <span class="visually-hidden">(current)</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ path('valeur_index') }}">consulter valeurs</a>
+                    <a class="nav-link" href="{{ path('valeur_index') }}" style="color:white;">consultation</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ path('capteur_index') }}">gérer Device</a>
+                    <a class="nav-link" href="{{ path('capteur_index') }}" style="color:white;">device</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ path('capteur_new') }}">ajouter capteur</a>
+                    <a class="nav-link" href="{{ path('capteur_new') }}" style="color:white;">ajout capteur</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="http://www.dig2s.com/" style="color:white;">a propos</a>
+                  </li>
+                  {% if app.user %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" style="position: absolute; right: 230px; bottom :20px">
+                      <span class="badge rounded-pill bg-danger">2</span><br>
+                      <i style="color:white;font-size:30px;" class="bi bi-bell-fill"></i>
+                    </a>
+                  <li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" style="position: absolute; right: 330px; bottom :20px">
+                      <i class="bi bi-envelope-plus" class="bi bi-bell-fill" style="color:white;font-size:35px;"></i>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if app.user %}
+                    <div class="mb-3">
+                      <a class="btn" style="background-color:#3965a0;color:white;position: absolute; right: 30px; " href="{{ path('app_logout') }}">
+                        déconnexion
+                      </a>
+                    </div>
+                  {% endif %}
                   </li>
                   {# <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -67,6 +91,8 @@
               </div>
             </div>
           </nav>
+          <br>
        {% block body %}{% endblock %}
+       <br>
     </body>
 </html>
