@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Message{% endblock %}
+
+{% block body %}
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  <i class="bi bi-list"></i> Boite de messagerie 
+</button>  
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ path('message_new') }}">
+            <i class="bi bi-plus-square"></i> Nouveau message
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('message_index') }}">
+              Boite de réception 
+              <span class="badge rounded-pill" style="background-color:grey;">{{app.user.received|length}}</span>    
+              
+            </a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('message_sent') }}">
+              Messages envoyés 
+              <span class="badge rounded-pill bg-danger">{{app.user.sent|length}}</span>
+                   
+            </a> 
+          </li>
+      </ul>
+  </div>
+</div>           
+  <div class="container" align="center">
+    <div class="col-6">
+
+    <center><h1>Envoyer un Message</h1></center>
+    <br>
+    {{ include('message/_form.html.twig') }}
+
+    <a href="{{ path('message_index') }}">retour à la liste</a>
+</div>
+</div>
+{% endblock %}

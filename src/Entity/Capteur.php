@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Capteur
@@ -32,6 +33,10 @@ class Capteur
      * @var float
      *
      * @ORM\Column(name="seuilMin", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\Expression(
+     *     "value>=this.getRef().getRangmin() and this.getSeuilmin()<this.getSeuilmax()",
+     *     message="la valeur n'est pas valide"
+     * )
      */
     private $seuilmin;
 
@@ -39,6 +44,10 @@ class Capteur
      * @var float
      *
      * @ORM\Column(name="seuilMax", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\Expression(
+     *     "value<=this.getRef().getRangmax() and this.getSeuilmax()>this.getSeuilmin()",
+     *     message="la valeur n'est pas valide"
+     * )
      */
     private $seuilmax;
 

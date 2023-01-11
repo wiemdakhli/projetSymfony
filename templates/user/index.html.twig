@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container">
     <center><h1>gestion des comptes</h1></center>
-    <a class="btn" style="background-color:rgb(93, 160, 104);color:white;" href="{{ path('admin_new') }}"><i class="bi bi-plus-square"></i> compte</a>
+    <a class="btn" style="background-color:rgb(93, 160, 104);color:white;" href="{{ path('admin_new') }}"><i style="font-size:20px;" class="bi bi-person-plus-fill"></i> compte</a>
     <br><br>
     <table class="table table-hover">
         <thead>
@@ -31,7 +31,7 @@
                 <td>
                     {% for role in user.roles %}
                         {% if role =="ROLE_USER" %}
-                        utilisater <br>
+                        utilisateur <br>
                         {% else %}
                         admin <br>
                         {% endif %}

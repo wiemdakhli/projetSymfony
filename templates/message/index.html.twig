@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  <i class="bi bi-list"></i> Boite de messagerie  
+</button>  
+<br><br>
+<a class="btn" style="background-color:rgb(93, 160, 104);color:white;" href="{{ path('message_new') }}"><i class="bi bi-plus-square"></i> nouveau Message</a>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('message_new') }}">
+            <i class="bi bi-plus-square"></i> Nouveau message
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ path('message_index') }}">
+              Boite de réception 
+              <span class="badge rounded-pill bg-danger">{{app.user.received|length}}</span>    
+              
+            </a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('message_sent') }}">
+              Messages envoyés 
+              <span style="background-color:grey;" class="badge rounded-pill ">{{app.user.sent|length}}</span>
+                   
+            </a> 
+          </li>
+      </ul>
+  </div>
+</div>
+  <div class="container">
+    <center><h1>Boite de réception</h1></center>
+    <br>
+    <table class="table">
+        <thead>
+            <tr class="table-active">
+                <th>Lu</th>
+                <th>De</th>
+                <th>Objet</th>
+                <th>Message</th>
+                <th>Recu le</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in app.user.received %}
+                <tr>
+                  {% if message.isRead == 0 %}
+                  {% set color = "table-warning row" %}
+                  {% else %}
+                    {% set color = "" %}
+                  {% endif %}
+                    <td class="{{color}};">{{ message.isRead ? '<i style="color:green;font-size:25px;" class="bi bi-check-lg"></i>' : '<span style="color:red;">Non Lu</span>' }}</td>
+                    <td class="{{color}};">{{ message.sender.email }}</td>
+                    <td class="{{color}};">{{ message.objet }}</td>
+                    <td class="{{color}};">{{ message.message }}</td>
+                    <td class="{{color}};">{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="{{color}};">
+                        <a class="btn" style="background-color:rgb(173, 231, 253);color:black" href="{{ path('message_show', {'id': message.id}) }}"><i class="bi bi-search"></i> Ouvrir</a>
+                        {# <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a> #}
+                    </td>
+                </tr>
+        {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

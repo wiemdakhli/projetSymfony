@@ -18,6 +18,18 @@
                 <td class="table table-info">{{ user.email }}</td>
             </tr>
             <tr>
+                <th class="table table-dark">Nom</th>
+                <td class="table table-info">{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th class="table table-dark">Prenom</th>
+                <td class="table table-info">{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th class="table table-dark">Telephone</th>
+                <td class="table table-info">{{ user.telephone }}</td>
+            </tr>
+            <tr>
                 <th class="table table-dark">Roles</th>
                 <td class="table table-info">
                     {% for role in user.roles %}

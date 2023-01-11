@@ -46,15 +46,34 @@ class RegistrationFormType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Entrez un Mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'votre mot de passe doit contenir au moins {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('nom',null,[
+                'attr' =>[
+                    'style'=>'border:2px solid black;'
+                
+                ]
+            
+            ])
+            ->add('prenom',null,[
+                'attr' =>[
+                    'style'=>'border:2px solid black;'
+                ]
+            
+            ])
+            ->add('telephone',null,[
+                'attr' =>[
+                    'style'=>'border:2px solid black;'
+                ]
+            
             ])
             ->add('roles', ChoiceType::class,[
                 'choices' => [

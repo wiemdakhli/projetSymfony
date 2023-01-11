@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message{% endblock %}
+
+{% block body %}
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <i class="bi bi-list"></i> Boite de messagerie 
+  </button>  
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color:rgb(255, 252, 225);">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
+      <button type="button" class="btn btn-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('message_new') }}">
+              <i class="bi bi-plus-square"></i> Nouveau message
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path('message_index') }}">
+                Boite de réception 
+                <span class="badge rounded-pill bg-danger">{{app.user.received|length}}</span>    
+                
+              </a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('message_sent') }}">
+                Messages envoyés 
+                <span class="badge rounded-pill" style="background-color:grey;">{{app.user.sent|length}}</span>
+                     
+              </a> 
+            </li>
+        </ul>
+    </div>
+  </div>
+
+<div class="container" align="center">
+    <div class="col-4">
+    <h1>Message</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th class="table-dark">De</th>
+                <td class="table-warning">{{ message.sender.email }}</td>
+            </tr>
+            <tr>
+                <th class="table-dark">Objet</th>
+                <td class="table-warning">{{ message.objet }}</td>
+            </tr>
+            <tr>
+                <th class="table-dark">Message</th>
+                <td class="table-warning">{{ message.message }}</td>
+            </tr>
+            <tr>
+                <th class="table-dark">Date et heure</th>
+                <td class="table-warning">{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="table-dark">lu</th>
+                <td class="table-warning">{{ message.isRead ? 'est Lu' : 'Non Lu' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a> #}
+
+    {{ include('message/_delete_form.html.twig') }}
+    <a href="{{ path('message_index') }}">retour à la liste</a>
+
+    </div>
+</div>
+{% endblock %}
